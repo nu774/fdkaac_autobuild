@@ -1,0 +1,25 @@
+INSTALL
+-------
+
+Place these files to some directory.
+You had better avoid pathnames containing white spaces or non-ascii characters.
+Disk space of 200MB or so is required.
+
+1) Execute install-mingw.bat.
+   MinGW and MSYS are installed under current directory.
+   Sub directories such as bin, include, lib,... are created.
+2) Execute build_libfdk_aac.bat.
+3) Execute build_fdkaac.bat.
+
+Finally, you will get fdkaac.exe in the current directory.
+You can place it to anyware you want.
+
+If you only need fdkaac.exe and don't need to update it,
+you can safely remove other files/directories.
+Special uninstallation is not required.
+
+Otherwise, you might want to keep MinGW/MSYS.
+In this case, you can skip step 1 on the next time.
+
+If you want to move/rename this directory, you have to manually edit
+msys/1.0/etc/fstab so that entry in it will point to the new directory.
