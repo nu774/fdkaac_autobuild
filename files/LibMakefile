@@ -1,6 +1,8 @@
 PREFIX=/mingw
 
-SOURCES=\
+SOVER=0
+
+AACdec_SOURCES=\
 ./libAACdec/src/aacdecoder.cpp \
 ./libAACdec/src/aacdecoder_lib.cpp \
 ./libAACdec/src/aacdec_drc.cpp \
@@ -20,7 +22,9 @@ SOURCES=\
 ./libAACdec/src/rvlc.cpp \
 ./libAACdec/src/rvlcbit.cpp \
 ./libAACdec/src/rvlcconceal.cpp \
-./libAACdec/src/stereo.cpp \
+./libAACdec/src/stereo.cpp
+
+AACenc_SOURCES=\
 ./libAACenc/src/aacenc.cpp \
 ./libAACenc/src/aacenc_hcr.cpp \
 ./libAACenc/src/aacenc_lib.cpp \
@@ -53,7 +57,9 @@ SOURCES=\
 ./libAACenc/src/sf_estim.cpp \
 ./libAACenc/src/spreading.cpp \
 ./libAACenc/src/tonality.cpp \
-./libAACenc/src/transform.cpp \
+./libAACenc/src/transform.cpp
+
+FDK_SOURCES=\
 ./libFDK/src/autocorr2nd.cpp \
 ./libFDK/src/dct.cpp \
 ./libFDK/src/FDK_bitbuffer.cpp \
@@ -67,18 +73,26 @@ SOURCES=\
 ./libFDK/src/fixpoint_math.cpp \
 ./libFDK/src/mdct.cpp \
 ./libFDK/src/qmf.cpp \
-./libFDK/src/scale.cpp \
+./libFDK/src/scale.cpp
+
+MpegTPDec_SOURCES=\
 ./libMpegTPDec/src/tpdec_adif.cpp \
 ./libMpegTPDec/src/tpdec_adts.cpp \
 ./libMpegTPDec/src/tpdec_asc.cpp \
 ./libMpegTPDec/src/tpdec_latm.cpp \
-./libMpegTPDec/src/tpdec_lib.cpp \
+./libMpegTPDec/src/tpdec_lib.cpp
+
+MpegTPEnc_SOURCES=\
 ./libMpegTPEnc/src/tpenc_adif.cpp \
 ./libMpegTPEnc/src/tpenc_adts.cpp \
 ./libMpegTPEnc/src/tpenc_asc.cpp \
 ./libMpegTPEnc/src/tpenc_latm.cpp \
-./libMpegTPEnc/src/tpenc_lib.cpp \
-./libPCMutils/src/pcmutils_lib.cpp \
+./libMpegTPEnc/src/tpenc_lib.cpp
+
+PCMutils_SOURCES=\
+./libPCMutils/src/pcmutils_lib.cpp
+
+SBRdec_SOURCES=\
 ./libSBRdec/src/env_calc.cpp \
 ./libSBRdec/src/env_dec.cpp \
 ./libSBRdec/src/env_extr.cpp \
@@ -94,7 +108,9 @@ SOURCES=\
 ./libSBRdec/src/sbr_deb.cpp \
 ./libSBRdec/src/sbr_dec.cpp \
 ./libSBRdec/src/sbr_ram.cpp \
-./libSBRdec/src/sbr_rom.cpp \
+./libSBRdec/src/sbr_rom.cpp
+
+SBRenc_SOURCES=\
 ./libSBRenc/src/bit_sbr.cpp \
 ./libSBRenc/src/code_env.cpp \
 ./libSBRenc/src/env_bit.cpp \
@@ -113,30 +129,54 @@ SOURCES=\
 ./libSBRenc/src/sbr_ram.cpp \
 ./libSBRenc/src/sbr_rom.cpp \
 ./libSBRenc/src/ton_corr.cpp \
-./libSBRenc/src/tran_det.cpp \
+./libSBRenc/src/tran_det.cpp
+
+SYS_SOURCES=\
 ./libSYS/src/conv_string.cpp \
 ./libSYS/src/genericStds.cpp
 
+SOURCES=$(AACdec_SOURCES) $(AACenc_SOURCES) $(FDK_SOURCES) \
+        $(MpegTPDec_SOURCES) $(MpegTPEnc_SOURCES) $(PCMutils_SOURCES) \
+        $(SBRdec_SOURCES) $(SBRenc_SOURCES) $(SYS_SOURCES)
+
 OBJS=$(SOURCES:.cpp=.o)
 
-INCLUDE=-I libAACdec/include -I libAACenc/include -I libFDK/include -I libMpegTPDec/include -I libMpegTPEnc/include -I libPCMutils/include -I libSBRdec/include -I libSBRenc/include -I libSYS/include
+INCLUDE=-I libAACdec/include -I libAACenc/include -I libFDK/include \
+	-I libMpegTPDec/include -I libMpegTPEnc/include \
+	-I libPCMutils/include -I libSBRdec/include -I libSBRenc/include \
+	-I libSYS/include
 
 CPPFLAGS=$(INCLUDE)
 CXXFLAGS=-O2 -Wall -fno-exceptions -fno-rtti
 
-all: libfdk-aac.a
+all: libfdk-aac.a libfdk-aac-$(SOVER).dll
 
-install: libfdk-aac.a
-	mkdir -p $(PREFIX)/include/fdk-aac
-	cp libfdk-aac.a $(PREFIX)/lib
-	cp libAACdec/include/aacdecoder_lib.h $(PREFIX)/include/fdk-aac
-	cp libAACenc/include/aacenc_lib.h $(PREFIX)/include/fdk-aac
-	cp libSYS/include/FDK_Audio.h $(PREFIX)/include/fdk-aac
-	cp libSYS/include/genericStds.h $(PREFIX)/include/fdk-aac
-	cp libSYS/include/machine_type.h $(PREFIX)/include/fdk-aac
+install: libfdk-aac.a libfdk-aac-$(SOVER).dll
+	if test -d stage; then rm -fr stage; fi
+	mkdir -p stage/bin
+	mkdir -p stage/lib
+	mkdir -p stage/include/fdk-aac
+	cp -p libfdk-aac-$(SOVER).dll stage/bin
+	cp -p libfdk-aac.a $(PREFIX)/lib
+	cp -p libfdk-aac.dll.a stage/lib
+	cp -p libAACdec/include/aacdecoder_lib.h stage/include/fdk-aac
+	cp -p libAACenc/include/aacenc_lib.h stage/include/fdk-aac
+	cp -p libSYS/include/FDK_Audio.h stage/include/fdk-aac
+	cp -p libSYS/include/genericStds.h stage/include/fdk-aac
+	cp -p libSYS/include/machine_type.h stage/include/fdk-aac
+	cp -pr stage/* $(PREFIX)/
+	cd stage && zip -r $(PREFIX)/libfdk-aac-win32-bin.zip * & cd ..
 
 libfdk-aac.a: $(OBJS)
 	$(AR) cru $@ $(OBJS)
+
+libfdk-aac-$(SOVER).dll: $(OBJS)
+	$(CC) -shared -o $@ \
+	    -Wl,--out-implib=libfdk-aac.dll.a \
+	    -Wl,--version-script=libfdk-aac.version \
+	    -Wl,--enable-auto-import \
+	    -Wl,--whole-archive $(OBJS) \
+	    -Wl,--no-whole-archive
 
 clean:
 	rm $(OBJS)

@@ -93,5 +93,6 @@ function install_mingw(zip_file, packages)
     FSO.GetFile(zip_file).Delete()
 }
 
-var packages = "mingw32-base mingw32-gcc-g++ msys-make msys-wget msys-unzip"
+var packages = "mingw32-base mingw32-gcc-g++ msys-make" +
+               " msys-wget msys-zip msys-unzip"
 install_mingw(download_mingw_get(), packages)

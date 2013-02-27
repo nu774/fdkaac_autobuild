@@ -19,7 +19,7 @@ CFLAGS=-O2
 all: fdkaac.exe
 
 fdkaac.exe: $(OBJS)
-	$(CC) -o$@ $(OBJS) -lfdk-aac
+	$(CC) -o$@ $(OBJS) -static -lfdk-aac
 
 install: fdkaac.exe
 	cp fdkaac.exe $(PREFIX)/bin
