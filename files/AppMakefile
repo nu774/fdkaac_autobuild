@@ -3,6 +3,8 @@ PREFIX=/mingw
 SOURCES=\
     src/aacenc.c     \
     src/caf_reader.c \
+    src/extrapolator.c \
+    src/lpc.c        \
     src/lpcm.c       \
     src/m4af.c       \
     src/main.c       \
