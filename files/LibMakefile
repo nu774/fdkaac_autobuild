@@ -90,6 +90,7 @@ MpegTPEnc_SOURCES=\
 ./libMpegTPEnc/src/tpenc_lib.cpp
 
 PCMutils_SOURCES=\
+./libPCMutils/src/limiter.cpp \
 ./libPCMutils/src/pcmutils_lib.cpp
 
 SBRdec_SOURCES=\
