@@ -21,5 +21,5 @@ Special uninstallation is not required.
 Otherwise, you might want to keep MinGW/MSYS.
 In this case, you can skip step 1 on the next time.
 
-If you want to move/rename this directory, you have to manually edit
-msys/1.0/etc/fstab so that entry in it will point to the new directory.
+If you want to move/rename this directory, you have to execute fstab-fix.bat,
+so that will point MinGW/MSYS to the new directory.
