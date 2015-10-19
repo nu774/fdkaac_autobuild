@@ -1,2 +1,2 @@
 @echo off
-cscript //E:jscript install-mingw.js
+cscript //E:jscript install-mingw.js %*
