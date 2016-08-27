@@ -26,7 +26,6 @@ AACdec_SOURCES=\
 
 AACenc_SOURCES=\
 ./libAACenc/src/aacenc.cpp \
-./libAACenc/src/aacenc_hcr.cpp \
 ./libAACenc/src/aacenc_lib.cpp \
 ./libAACenc/src/aacenc_pns.cpp \
 ./libAACenc/src/aacEnc_ram.cpp \
@@ -79,6 +78,7 @@ MpegTPDec_SOURCES=\
 ./libMpegTPDec/src/tpdec_adif.cpp \
 ./libMpegTPDec/src/tpdec_adts.cpp \
 ./libMpegTPDec/src/tpdec_asc.cpp \
+./libMpegTPDec/src/tpdec_drm.cpp \
 ./libMpegTPDec/src/tpdec_latm.cpp \
 ./libMpegTPDec/src/tpdec_lib.cpp
 
