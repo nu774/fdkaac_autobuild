@@ -110,7 +110,7 @@
         this.FSO.GetFile(zip_file).Delete()
     }
 
-    var packages = "mingw32-base mingw32-gcc-g++ msys-make msys-wget msys-zip msys-unzip"
+    var packages = "mingw32-base mingw32-gcc-g++ mingw32-pthreads-w32 msys-make msys-wget msys-zip msys-unzip"
     var downloader = new Downloader()
     var it = null;
     if (WScript.Arguments.length == 0) {
