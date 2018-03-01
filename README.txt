@@ -1,3 +1,8 @@
+CAUTION
+-------
+
+Due to recent TLS1.1 drop by github and too old OpenSSL version included in MSYS, this script is not currently working (until MSYS updates OpenSSL).
+
 INSTALL
 -------
 
