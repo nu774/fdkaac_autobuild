@@ -162,7 +162,7 @@ install: libfdk-aac.a libfdk-aac-$(SOVER).dll
 	cp -p libfdk-aac.dll.a stage/lib
 	cp -p libAACdec/include/aacdecoder_lib.h stage/include/fdk-aac
 	cp -p libAACenc/include/aacenc_lib.h stage/include/fdk-aac
-	cp -p libSYS/include/FDK_Audio.h stage/include/fdk-aac
+	cp -p libSYS/include/FDK_audio.h stage/include/fdk-aac
 	cp -p libSYS/include/genericStds.h stage/include/fdk-aac
 	cp -p libSYS/include/machine_type.h stage/include/fdk-aac
 	cp -pr stage/* $(PREFIX)/
