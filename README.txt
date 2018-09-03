@@ -1,7 +1,12 @@
-CAUTION
--------
+DEAD PROJECT!!! Don't use this
+------------------------------
 
-Due to recent TLS1.1 drop by github and too old OpenSSL version included in MSYS, this script is not currently working (until MSYS updates OpenSSL).
+This script no longer works because:
+1) Due to recent TLS1.1 drop by github and too old OpenSSL version included in MSYS, downloading from github fails.
+2) Makefiles are not updated to the latest FDKv2.
+
+
+
 
 INSTALL
 -------
