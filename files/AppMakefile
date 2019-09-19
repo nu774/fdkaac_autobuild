@@ -30,3 +30,8 @@ fdkaac.exe: $(OBJS)
 
 install: fdkaac.exe
 	cp fdkaac.exe $(PREFIX)/bin
+
+.PHONY: clean
+
+clean:
+	rm -f fdkaac.exe src/*.o
